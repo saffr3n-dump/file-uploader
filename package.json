@@ -7,7 +7,8 @@
     "start": "node --env-file=.env src/index.js",
     "dev": "node --env-file=.env --watch src/index.js",
     "lint": "eslint .",
-    "format": "prettier -w . && prisma format"
+    "format": "prettier -w . && prisma format",
+    "db:migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
