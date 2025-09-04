@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Uploader | <%= title %></title>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo" aria-label="Return back home">File Uploader</a>
+      <nav>
+        <ul>
+          <% if (user) { %>
+            <li><a href="/folders">Folders</a></li>
+            <li><a href="/files">Files</a></li>
+            <li><a href="/logout">Logout</a></li>
+          <% } else { %>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+          <% } %>
+        </ul>
+      </nav>
+    </header>
+    <main>
