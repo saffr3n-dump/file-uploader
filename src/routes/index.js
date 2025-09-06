@@ -5,6 +5,7 @@ import {
   loginPost,
   registerGet,
   registerPost,
+  logout,
 } from '../controllers/index.js';
 
 const indexRouter = Router();
@@ -14,5 +15,6 @@ indexRouter.get('/login', loginGet);
 indexRouter.post('/login', loginPost);
 indexRouter.get('/register', registerGet);
 indexRouter.post('/register', registerPost);
+indexRouter.get('/logout', logout);
 
 export default indexRouter;
