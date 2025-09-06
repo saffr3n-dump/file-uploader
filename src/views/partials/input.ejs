@@ -1,0 +1,13 @@
+<label for="<%= name %>">
+  <%= label %>
+  <input
+    type="<%= type %>"
+    name="<%= name %>"
+    id="<%= name %>"
+    value="<%= locals.value ?? '' %>"
+    <%= locals.required ? 'required' : '' %>
+
+    aria-describedby="<%= name %>-error"
+    <%= locals.errors?.[name] ? 'aria-invalid' : '' %>
+  />
+</label>
