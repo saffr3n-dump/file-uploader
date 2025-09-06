@@ -1,4 +1,5 @@
 import { body, validationResult } from 'express-validator';
+import passport from '../core/passport.js';
 import User from '../services/user.js';
 
 export const home = (_req, res) => {
@@ -12,6 +13,27 @@ export const loginGet = (req, res, next) => {
     res.redirect('/login');
   });
 };
+
+export const loginPost = [
+  body('name').trim(),
+  body('password').trim(),
+
+  (req, res, next) => {
+    passport.authenticate('local', (err, user) => {
+      if (err) return next(err);
+      if (!user) {
+        return res.render('login', {
+          data: { name: req.body.name },
+          errors: { general: { msg: 'Invalid name or password' } },
+        });
+      }
+      req.login(user, (err) => {
+        if (err) return next(err);
+        res.redirect('/folders');
+      });
+    })(req, res, next);
+  },
+];
 
 export const registerGet = (req, res, next) => {
   if (!req.isAuthenticated()) return res.render('register');
