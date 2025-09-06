@@ -1,12 +1,12 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import bcrypt from 'bcryptjs';
-import db from './db.js';
+import User from '../services/user.js';
 
 passport.use(
   new LocalStrategy({ usernameField: 'name' }, async (name, pass, done) => {
     try {
-      const user = await db.user.findUnique({ where: { name } });
+      const user = await User.findByName(name);
       if (!user) return done(null, false);
       const match = await bcrypt.compare(pass, user.password);
       if (!match) return done(null, false);
@@ -23,7 +23,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await db.user.findUnique({ where: { id } });
+    const user = await User.findById(id);
     done(null, user);
   } catch (err) {
     done(err);
