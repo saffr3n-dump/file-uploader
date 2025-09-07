@@ -4,6 +4,7 @@ import session from './session.js';
 import passport from './passport.js';
 import addUserToLocals from '../middlewares/add-user-to-locals.js';
 import indexRouter from '../routes/index.js';
+import foldersRouter from '../routes/folders.js';
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use(passport.session());
 app.use(addUserToLocals());
 
 app.use('/', indexRouter);
+app.use('/folders', foldersRouter);
 
 export default app;

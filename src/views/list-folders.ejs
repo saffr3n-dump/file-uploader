@@ -1,0 +1,29 @@
+<% locals.title = 'Your Folders' %>
+<%- include('partials/top') %>
+
+<h1><%= title %></h1>
+
+<% if (folders.length) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Files</th>
+        <th>Size</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const folder of folders) { %>
+        <tr>
+          <td><a href="/folders/<%= folder.id %>"><%= folder.name %></a></td>
+          <td><%= folder.fileCount %></td>
+          <td><%= folder.totalSize %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p>There are no folders yet...</p>
+<% } %>
+
+<%- include('partials/bot') %>
