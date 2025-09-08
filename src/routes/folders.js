@@ -9,6 +9,7 @@ import {
   deleteFolderGet,
   deleteFolderPost,
 } from '../controllers/folders.js';
+import filesRouter from './files.js';
 import checkAuth from '../middlewares/check-auth.js';
 
 const foldersRouter = Router();
@@ -21,5 +22,6 @@ foldersRouter.get('/:id/rename', checkAuth, renameFolderGet);
 foldersRouter.post('/:id/rename', checkAuth, renameFolderPost);
 foldersRouter.get('/:id/delete', checkAuth, deleteFolderGet);
 foldersRouter.post('/:id/delete', checkAuth, deleteFolderPost);
+foldersRouter.use('/:folderId/files', filesRouter);
 
 export default foldersRouter;
