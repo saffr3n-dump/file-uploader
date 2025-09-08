@@ -1,0 +1,30 @@
+<% locals.title = 'Upload File' %>
+<%- include('partials/top') %>
+
+<h1><%= title %></h1>
+<%- include('partials/errors') %>
+
+<form
+  action="/folders/<%= locals.data.folderId %>/files/upload"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <%- include('partials/input', {
+    type     : 'file',
+    name     : 'file',
+    label    : 'File',
+    required : true,
+  }) %>
+
+  <%- include('partials/input', {
+    type  : 'text',
+    name  : 'name',
+    label : 'Name',
+    value : locals.data.name,
+  }) %>
+
+  <button type="submit">Upload</button>
+  <a href="/folders/<%= locals.data.folderId %>" class="button">Cancel</a>
+</form>
+
+<%- include('partials/bot') %>
