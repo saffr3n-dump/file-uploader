@@ -11,6 +11,7 @@
         <th>Name</th>
         <th>Files</th>
         <th>Size</th>
+        <th>Controls</th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +20,10 @@
           <td><a href="/folders/<%= folder.id %>"><%= folder.name %></a></td>
           <td><%= folder.fileCount %></td>
           <td><%= folder.totalSize %></td>
+          <td>
+            <a href="/folders/<%= folder.id %>/rename" class="button">Rename</a>
+            <a href="/folders/<%= folder.id %>/delete" class="button">Delete</a>
+          </td>
         </tr>
       <% } %>
     </tbody>
