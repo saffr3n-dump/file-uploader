@@ -15,7 +15,7 @@ foldersRouter.get('/', checkAuth, listFolders);
 foldersRouter.get('/create', checkAuth, createFolderGet);
 foldersRouter.post('/create', checkAuth, createFolderPost);
 foldersRouter.get('/:id', checkAuth, viewFolder);
-foldersRouter.get('/:id/rename', renameFolderGet);
-foldersRouter.post('/:id/rename', renameFolderPost);
+foldersRouter.get('/:id/rename', checkAuth, renameFolderGet);
+foldersRouter.post('/:id/rename', checkAuth, renameFolderPost);
 
 export default foldersRouter;
