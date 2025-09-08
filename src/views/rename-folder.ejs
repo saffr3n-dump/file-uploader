@@ -2,18 +2,19 @@
 <%- include('partials/top') %>
 
 <h1><%= title %></h1>
+<%- include('partials/errors') %>
 
-<form action="/folders/<%= folder.id %>/rename" method="post">
+<form action="/folders/<%= locals.data.id %>/rename" method="post">
   <%- include('partials/input', {
     type     : 'text',
     name     : 'name',
     label    : 'Name',
     required : true,
-    value    : folder.name,
+    value    : locals.data.name,
   }) %>
 
   <button type="submit">Rename</button>
-  <a href="/folders/<%= folder.id %>" class="button">Cancel</a>
+  <a href="/folders/<%= locals.data.id %>" class="button">Cancel</a>
 </form>
 
 <%- include('partials/bot') %>

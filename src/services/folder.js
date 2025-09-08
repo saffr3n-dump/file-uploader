@@ -35,4 +35,8 @@ export default class Folder {
   static async create({ name, userId }) {
     return await db.folder.create({ data: { name, userId } });
   }
+
+  static async rename(id, name) {
+    return await db.folder.update({ where: { id }, data: { name } });
+  }
 }
