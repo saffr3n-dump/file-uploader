@@ -42,3 +42,9 @@ export const viewFolder = async (req, res) => {
   if (!folder) throw new Error('Folder not found');
   res.render('view-folder', { folder });
 };
+
+export const renameFolderGet = async (req, res) => {
+  const folder = await Folder.findById(Number(req.params.id));
+  if (!folder) throw new Error('Folder not found');
+  res.render('rename-folder', { folder });
+};
