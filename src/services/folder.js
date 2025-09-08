@@ -5,8 +5,8 @@ export default class Folder {
     throw new Error('Cannot create an instance of the static class Folder');
   }
 
-  static findMany(userId) {
-    return db.$queryRaw`
+  static async findMany(userId) {
+    return await db.$queryRaw`
       SELECT
         fo.id,
         fo.name,
@@ -19,5 +19,13 @@ export default class Folder {
       GROUP BY fo.id
       ORDER BY fo.name;
     `;
+  }
+
+  static async findByName(name) {
+    return await db.folder.findUnique({ where: { name } });
+  }
+
+  static async create({ name, userId }) {
+    return await db.folder.create({ data: { name, userId } });
   }
 }
