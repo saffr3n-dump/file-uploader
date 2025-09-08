@@ -71,3 +71,8 @@ export const deleteFolderGet = async (req, res) => {
   if (!folder) throw new Error('Folder not found');
   res.render('delete-folder', { data: folder });
 };
+
+export const deleteFolderPost = async (req, res) => {
+  await Folder.delete(Number(req.params.id));
+  res.redirect('/folders');
+};

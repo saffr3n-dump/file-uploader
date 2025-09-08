@@ -39,4 +39,8 @@ export default class Folder {
   static async rename(id, name) {
     return await db.folder.update({ where: { id }, data: { name } });
   }
+
+  static async delete(id) {
+    return await db.folder.delete({ where: { id } });
+  }
 }

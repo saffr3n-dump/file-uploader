@@ -7,6 +7,7 @@ import {
   renameFolderGet,
   renameFolderPost,
   deleteFolderGet,
+  deleteFolderPost,
 } from '../controllers/folders.js';
 import checkAuth from '../middlewares/check-auth.js';
 
@@ -19,5 +20,6 @@ foldersRouter.get('/:id', checkAuth, viewFolder);
 foldersRouter.get('/:id/rename', checkAuth, renameFolderGet);
 foldersRouter.post('/:id/rename', checkAuth, renameFolderPost);
 foldersRouter.get('/:id/delete', checkAuth, deleteFolderGet);
+foldersRouter.post('/:id/delete', checkAuth, deleteFolderPost);
 
 export default foldersRouter;
