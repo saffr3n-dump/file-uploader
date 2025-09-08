@@ -1,0 +1,66 @@
+<% locals.title = folder.name %>
+<%- include('partials/top') %>
+
+<h1><%= title %></h1>
+
+<ul class="controls">
+  <li>
+    <a href="/folders/<%= folder.id %>/rename" class="button">
+      Rename Folder
+    </a>
+  </li>
+  <li>
+    <a href="/folders/<%= folder.id %>/delete" class="button">
+      Delete Folder
+    </a>
+  </li>
+  <li>
+    <a href="/folders/<%= folder.id %>/files/upload" class="button">
+      Upload File
+    </a>
+  </li>
+</ul>
+
+<% if (folder.files.length) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Uploaded At</th>
+        <th>Controls</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const file of folder.files) { %>
+        <tr>
+          <td>
+            <a href="/folders/<%= folder.id %>/files/<%= file.id %>">
+              <%= file.name %>
+            </a>
+          </td>
+          <td><%= file.size %></td>
+          <td><%= file.uploadedAt %></td>
+          <td>
+            <a
+              href="/folders/<%= folder.id %>/files/<%= file.id %>/rename"
+              class="button"
+            >
+              Rename
+            </a>
+            <a
+              href="/folders/<%= folder.id %>/files/<%= file.id %>/delete"
+              class="button"
+            >
+              Delete
+            </a>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p>There are no files yet...</p>
+<% } %>
+
+<%- include('partials/bot') %>

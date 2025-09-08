@@ -21,6 +21,13 @@ export default class Folder {
     `;
   }
 
+  static async findById(id) {
+    return await db.folder.findUnique({
+      where: { id },
+      include: { files: true },
+    });
+  }
+
   static async findByName(name) {
     return await db.folder.findUnique({ where: { name } });
   }
