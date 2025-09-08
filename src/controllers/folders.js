@@ -65,3 +65,9 @@ export const renameFolderPost = [
     res.redirect(`/folders/${folder.id}`);
   },
 ];
+
+export const deleteFolderGet = async (req, res) => {
+  const folder = await Folder.findById(Number(req.params.id));
+  if (!folder) throw new Error('Folder not found');
+  res.render('delete-folder', { data: folder });
+};
