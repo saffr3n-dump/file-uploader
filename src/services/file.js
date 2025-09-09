@@ -43,4 +43,14 @@ export default class File {
     if (error) throw error;
     return await db.file.update({ where: { id }, data: { name } });
   }
+
+  static async delete(username, id) {
+    const file = await db.file.findUnique({ where: { id } });
+    if (!file) throw new Error('File not found');
+    const { error } = await storage
+      .from(username)
+      .remove([`${file.folderId}/${file.name}`]);
+    if (error) throw error;
+    return await db.file.delete({ where: { id } });
+  }
 }

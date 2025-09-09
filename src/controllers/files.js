@@ -58,6 +58,7 @@ export const downloadFile = async (req, res) => {
 
 export const renameFileGet = async (req, res) => {
   const file = await File.findById(Number(req.params.fileId));
+  if (!file) throw new Error('File not found');
   res.render('rename-file', { data: file });
 };
 
@@ -88,3 +89,14 @@ export const renameFilePost = [
     res.redirect(`/folders/${file.folderId}`);
   },
 ];
+
+export const deleteFileGet = async (req, res) => {
+  const file = await File.findById(Number(req.params.fileId));
+  if (!file) throw new Error('File not found');
+  res.render('delete-file', { data: file });
+};
+
+export const deleteFilePost = async (req, res) => {
+  await File.delete(req.user.name, Number(req.params.fileId));
+  res.redirect(`/folders/${req.params.folderId}`);
+};
