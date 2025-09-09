@@ -1,0 +1,23 @@
+<% locals.title = 'Rename File' %>
+<%- include('partials/top') %>
+
+<h1><%= title %></h1>
+<%- include('partials/errors') %>
+
+<form
+  action="/folders/<%= locals.data.folderId %>/files/<%= locals.data.id %>/rename"
+  method="post"
+>
+  <%- include('partials/input', {
+    type     : 'text',
+    name     : 'name',
+    label    : 'Name',
+    required : true,
+    value    : locals.data.name,
+  }) %>
+
+  <button type="submit">Rename</button>
+  <a href="/folders/<%= locals.data.folderId %>" class="button">Cancel</a>
+</form>
+
+<%- include('partials/bot') %>

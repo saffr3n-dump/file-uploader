@@ -55,3 +55,8 @@ export const downloadFile = async (req, res) => {
   const file = await File.download(Number(req.params.fileId), req.user.name);
   res.redirect(file.signedUrl);
 };
+
+export const renameFileGet = async (req, res) => {
+  const file = await File.findById(Number(req.params.fileId));
+  res.render('rename-file', { data: file });
+};

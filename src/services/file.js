@@ -6,6 +6,10 @@ export default class File {
     throw new Error('Cannot create an instance of the static class File');
   }
 
+  static async findById(id) {
+    return db.file.findUnique({ where: { id } });
+  }
+
   static async findByName(name, folderId) {
     return await db.file.findUnique({
       where: { folderId_name: { name, folderId } },
