@@ -43,10 +43,9 @@ export default class Folder {
 
   static async delete(username, id) {
     const files = await db.file.findMany({ where: { folderId: id } });
-    const { error } = await storage
+    await storage
       .from(username)
       .remove(files.map((file) => `${id}/${file.name}`));
-    if (error) throw error;
     return await db.folder.delete({ where: { id } });
   }
 }
