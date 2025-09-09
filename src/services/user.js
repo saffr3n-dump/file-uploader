@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import db from '../core/db.js';
+import storage from '../core/storage.js';
 
 export default class User {
   constructor() {
@@ -15,6 +16,8 @@ export default class User {
   }
 
   static async create({ name, password }) {
+    const { error } = await storage.createBucket(name);
+    if (error) throw error;
     const hash = await bcrypt.hash(password, 10);
     return await db.user.create({ data: { name, password: hash } });
   }
