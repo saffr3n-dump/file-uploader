@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "npm i && prisma migrate deploy",
+    "build": "npm i && prisma migrate deploy && prisma generate",
     "start": "node --env-file=.env src/index.js",
     "dev": "node --env-file=.env --watch src/index.js",
     "lint": "eslint .",
