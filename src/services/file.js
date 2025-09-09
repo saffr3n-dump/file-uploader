@@ -33,4 +33,14 @@ export default class File {
     if (error) throw error;
     return data;
   }
+
+  static async rename(id, name, username) {
+    const file = await db.file.findUnique({ where: { id } });
+    if (!file) throw new Error('File not found');
+    const { error } = await storage
+      .from(username)
+      .move(`${file.folderId}/${file.name}`, `${file.folderId}/${name}`);
+    if (error) throw error;
+    return await db.file.update({ where: { id }, data: { name } });
+  }
 }

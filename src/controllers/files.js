@@ -60,3 +60,31 @@ export const renameFileGet = async (req, res) => {
   const file = await File.findById(Number(req.params.fileId));
   res.render('rename-file', { data: file });
 };
+
+export const renameFilePost = [
+  body('name')
+    .trim()
+    .notEmpty()
+    .withMessage('File is required')
+    .bail()
+    .custom(async (filename, { req }) => {
+      const file = await File.findByName(filename, Number(req.params.folderId));
+      if (file) throw new Error('Name is already in use in this folder');
+    }),
+
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render('rename-file', {
+        data: { ...req.params, ...req.body },
+        errors: errors.mapped(),
+      });
+    }
+    const file = await File.rename(
+      Number(req.params.fileId),
+      req.body.name,
+      req.user.name,
+    );
+    res.redirect(`/folders/${file.folderId}`);
+  },
+];
