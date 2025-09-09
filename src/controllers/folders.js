@@ -73,6 +73,6 @@ export const deleteFolderGet = async (req, res) => {
 };
 
 export const deleteFolderPost = async (req, res) => {
-  await Folder.delete(Number(req.params.id));
+  await Folder.delete(req.user.name, Number(req.params.id));
   res.redirect('/folders');
 };

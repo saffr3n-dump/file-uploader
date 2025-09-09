@@ -1,4 +1,5 @@
 import db from '../core/db.js';
+import storage from '../core/storage.js';
 
 export default class Folder {
   constructor() {
@@ -40,7 +41,12 @@ export default class Folder {
     return await db.folder.update({ where: { id }, data: { name } });
   }
 
-  static async delete(id) {
+  static async delete(username, id) {
+    const files = await db.file.findMany({ where: { folderId: id } });
+    const { error } = await storage
+      .from(username)
+      .remove(files.map((file) => `${id}/${file.name}`));
+    if (error) throw error;
     return await db.folder.delete({ where: { id } });
   }
 }
