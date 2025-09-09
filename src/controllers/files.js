@@ -50,3 +50,8 @@ export const uploadFilePost = [
     });
   },
 ];
+
+export const downloadFile = async (req, res) => {
+  const file = await File.download(Number(req.params.fileId), req.user.name);
+  res.redirect(file.signedUrl);
+};

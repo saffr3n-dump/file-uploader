@@ -19,4 +19,14 @@ export default class File {
     if (error) throw error;
     return await db.file.create({ data: { name, size, folderId } });
   }
+
+  static async download(id, username) {
+    const file = await db.file.findUnique({ where: { id } });
+    if (!file) throw new Error('File not found');
+    const { data, error } = await storage
+      .from(username)
+      .createSignedUrl(`${file.folderId}/${file.name}`, 60, { download: true });
+    if (error) throw error;
+    return data;
+  }
 }
